@@ -1,0 +1,104 @@
+@keyframes bounce-top {
+    0% {
+      transform: translateY(-45px);
+      animation-timing-function: ease-in;
+      opacity: 1;
+    }
+    24% {
+      opacity: 1;
+    }
+    40% {
+      transform: translateY(-24px);
+      animation-timing-function: ease-in;
+    }
+    65% {
+      transform: translateY(-12px);
+      animation-timing-function: ease-in;
+    }
+    82% {
+      transform: translateY(-6px);
+      animation-timing-function: ease-in;
+    }
+    93% {
+      transform: translateY(-4px);
+      animation-timing-function: ease-in;
+    }
+    25%,
+    55%,
+    75%,
+    87% {
+      transform: translateY(0px);
+      animation-timing-function: ease-out;
+    }
+    100% {
+      transform: translateY(0px);
+      animation-timing-function: ease-out;
+      opacity: 1;
+    }
+  }
+.bounce-top {
+	animation: bounce-top 0.9s both;
+    color: whitesmoke
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: system-ui;
+    color: #001200;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ece6b2;
+}
+
+p,
+.font {
+    color: #ece6b2;
+}
+
+.parentinput1 {
+    margin-bottom: 60px;
+    background-color: #001200;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+    border-radius: 20px;
+}
+
+.parentinput2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    height: 60px;
+    width: 60%;
+    box-shadow: none;
+    border: none;
+    background-color: #001200;
+    color: #ece6b2;
+    font-weight: bold;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.card {
+    background: #001200;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.design {
+    border: 1px solid #ece6b2;
+    border-radius: 0 0 50px 50px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
