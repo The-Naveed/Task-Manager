@@ -1,5 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getStorage, ref, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyBYSiu8SPMuOIwquOjGcl9h7CnOfD06NXU",
     authDomain: "task-manager-9dab8.firebaseapp.com",
@@ -10,4 +13,4 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-export {app, getFirestore, db, collection, addDoc, getDocs}
+export { app, getFirestore, db, collection, addDoc, getDocs, getStorage, ref, deleteObject };
