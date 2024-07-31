@@ -48,6 +48,8 @@ input:focus {
 }
 
 .card {
+    margin-bottom: 10px;
+    width: 200px;
     background: #052b4e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 1),
         0 1px 3px rgba(0, 0, 0, 0.08);
@@ -67,11 +69,7 @@ input:focus {
 }
 
 .form {
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    margin-top: 5%;
+    margin: 5%;
     border-radius: 20px;
     padding: 20px;
     background: #052b4e;
@@ -82,7 +80,12 @@ input:focus {
     transition: box-shadow 0.3s ease;
 }
 
+.form h3 {
+    color: #d0c4af;
+}
+
 .form input {
+    margin-bottom: 10px;
     height: 70px;
     width: 100%;
     padding: 10px;
@@ -174,7 +177,9 @@ input:focus {
 
 .form2 h3 {
     color: #d0c4af;
-};
+}
+
+;
 
 .form2 a {
     color: #d0c4af;

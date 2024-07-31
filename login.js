@@ -15,8 +15,8 @@ const login = _ => {
     }
     localStorage.setItem("Email", mail.value);
     localStorage.setItem("Password", pass.value);
-    window.location.replace("./main.html")
 
+    window.location.replace("./main.html")
 };
 
 const create = _ => {
