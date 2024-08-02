@@ -1,30 +1,20 @@
 import { app, getFirestore, db, collection, documentId, addDoc, getDocs, doc, deleteDoc, updateDoc } from "./firebase.js"
 
+let now = new Date();
+let year = now.getFullYear();
+let month = String(now.getMonth() + 1).padStart(2, '0');
+let day = String(now.getDate()).padStart(2, '0');
+let hours = String(now.getHours()).padStart(2, '0');
+let minutes = String(now.getMinutes()).padStart(2, '0');
+let seconds = String(now.getSeconds()).padStart(2, '0');
+let formattedDate = `${day}-${month}-${year}`;
+let formattedTime = `${hours}:${minutes}`;
+
+
 let getInput = document.getElementById("data");
 let mainCard = document.getElementById("card");
 const taskAdd = async (task) => {
-    if (getInput.value.length <= 3) {
-        alert("Please Enter Correct Data")
-        return
-    };
-    mainCard.innerHTML +=
-        `            <div class="col-12 col-md-6 col-lg-4 card load" style="background: #052b4e;">
-                <div class="d-flex justify-content-around mb-3 p-2">
-                    <p class="card-text">Day:</p>
-                    <p class="card-text">Date:</p>
-                    <p class="card-text">Time:</p>
-                </div>
-                <h5 align="center" class="card-title pb-3">
-                    <i><strong class="font" id="font">${getInput.value}</strong></i>
-                </h5>
-                <div class="d-flex justify-content-between p-2">
-                    <button class="btn btn-primary" onclick="editData(this)">Edit Task</button>
-                    <button class="btn btn-success" onclick="completeData(this)">Completed</button>
-                    <button class="btn btn-danger" onclick="removeData(this)">Remove Task</button>
-                </div>
-            </div>`
     try {
-        // Add the document to Firestore
         let docRef = await addDoc(collection(db, "Card"), {
             // Initially add data without the ID
             info: `<div class="col-12 col-md-6 col-lg-4 card load" style="background: #052b4e;">
@@ -51,9 +41,9 @@ const taskAdd = async (task) => {
         await updateDoc(docRef, {
             info: `<div class="col-12 col-md-6 col-lg-4 card load" style="background: #052b4e;">
             <div class="d-flex justify-content-around mb-3 p-2">
-            <p class="card-text">Day:</p>
-            <p class="card-text">Date:</p>
-                        <p class="card-text">Time:</p>
+            <p class="card-text" id="date">Date : ${formattedDate}</p>
+                        <p class="card-text" id="time">Time : ${formattedTime}</p>
+                        <p class="card-text" id="last" style="display:none"></p>
                         </div>
                         <div id="dataid" style="display:none">${docId}</div>
                         <h5 align="center" class="card-title pb-3">
@@ -99,10 +89,9 @@ const removeData = async (remove) => {
 const completeData = async (complete) => {
     let completeDataParent = complete.closest('.card')
     let dataChild = completeDataParent.querySelector('#dataid');
+    let date = completeDataParent.querySelector('#date')
+    let time = completeDataParent.querySelector('#time')
     let val = completeDataParent.querySelector('.font');
-    console.log(val.innerHTML)
-    console.log(dataChild.innerHTML)
-
     completeDataParent.style = "background:black;"
     complete.previousElementSibling.remove()
     complete.remove()
@@ -110,15 +99,15 @@ const completeData = async (complete) => {
     await updateDoc(washingtonRef, {
         info: `<div class="col-12 col-md-6 col-lg-4 card load" style="background:black;">
         <div class="d-flex justify-content-around mb-3 p-2">
-                    <p class="card-text">Day:</p>
-                    <p class="card-text">Date:</p>
-                    <p class="card-text">Time:</p>
+                    <p class="card-text">${date.innerHTML}</p>
+                    <p class="card-text">${time.innerHTML}</p>
                     </div>
-        <div id="dataid" style="display:none">${dataChild.innerHTML}</div>
-
+                    <div id="dataid" style="display:none">${dataChild.innerHTML}</div>
+                    
                     <h5 align="center" class="card-title pb-3">
                     <i><strong class="font">${val.innerHTML}</strong></i>
                     </h5>
+                    <p class="card-text" id="last" align="center">Last Update : ${formattedTime} , ${formattedDate}</p>
                     <div class="d-flex justify-content-between align-items-center p-2">
                     <div>
                                 <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,22 +130,23 @@ const editData = async (edit) => {
     let editDataParent = edit.closest('.card');
     let dataChild = editDataParent.querySelector('#dataid');
     let val = editDataParent.querySelector('.font');
-    console.log(val.innerHTML)
-    console.log(dataChild.innerHTML)
     let change = prompt("Change Your Task", val.innerHTML)
     val.innerHTML = change
+    let date = editDataParent.querySelector('#date')
+    let time = editDataParent.querySelector('#time')
+    console.log(date.innerHTML)
     const washingtonRef = doc(db, "Card", dataChild.innerHTML);
     await updateDoc(washingtonRef, {
         info: `<div class="col-12 col-md-6 col-lg-4 card load" style="background: #052b4e;">
         <div class="d-flex justify-content-around mb-3 p-2">
-        <p class="card-text">Day:</p>
-        <p class="card-text">Date:</p>
-        <p class="card-text">Time:</p>
+                    <p class="card-text">${date.innerHTML}</p>
+                    <p class="card-text">${time.innerHTML}</p>
         </div>
         <div id="dataid" style="display:none">${dataChild.innerHTML}</div>
                     <h5 align="center" class="card-title pb-3">
                     <i><strong class="font">${val.innerHTML}</strong></i>
                     </h5>
+                    <p class="card-text" id="last" align="center">Last Update : ${formattedTime} , ${formattedDate}</p>
                     <div class="d-flex justify-content-between p-2">
                     <button class="btn btn-primary" onclick="editData(this)">Edit Task</button>
                     <button class="btn btn-success" onclick="completeData(this)">Completed</button>

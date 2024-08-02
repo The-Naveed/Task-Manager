@@ -48,7 +48,7 @@ input:focus {
 }
 
 .card {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 200px;
     background: #052b4e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 1),
@@ -183,4 +183,15 @@ input:focus {
 
 .form2 a {
     color: #d0c4af;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+nav h3 {
+    color: #052b4e;
 }
