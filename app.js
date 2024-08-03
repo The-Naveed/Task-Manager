@@ -1,4 +1,15 @@
-import { app, getFirestore, db, collection, documentId, addDoc, getDocs, doc, deleteDoc, updateDoc } from "./firebase.js"
+import {
+    app,
+    getFirestore,
+    db,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    deleteDoc,
+    updateDoc,
+}
+    from "./firebase.js"
 
 let now = new Date();
 let year = now.getFullYear();
@@ -64,7 +75,8 @@ const taskAdd = async (task) => {
 };
 
 try {
-    mainCard.innerHTML = "Managing Your Data Please Wait..."
+    // mainCard.innerHTML = "Managing Your Data Please Wait..."
+    mainCard.innerHTML = `<img height="100px" width="100px" src="https://i.gifer.com/ZKZg.gif" alt="Managing Your Data Please Wait..."><br><h5>Managing Your Data Please Wait...</h5>`
     const querySnapshot = await getDocs(collection(db, "Card"));
     mainCard.innerHTML = ""
     querySnapshot.forEach((doc) => {

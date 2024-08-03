@@ -1,8 +1,18 @@
-const sign = _ => {
+import {
+    auth,
+    createUserWithEmailAndPassword,
+    getAuth
+}
+    from "./firebase.js"
+
+    
+    const sign = _ => {
+
     let firstName = document.getElementById("fName").value;
     let lastName = document.getElementById("lName").value;
-    let mail = document.getElementById("mail").value;
-    let pass = document.getElementById("pass").value;
+    let email = document.getElementById("mail").value;
+    let password = document.getElementById("pass").value;
+
     if (!firstName) {
         alert("First Name Not Found")
         return
@@ -23,11 +33,21 @@ const sign = _ => {
         alert("Password Must Be 8 Characters")
         return
     };
+
     localStorage.setItem("First Name", firstName);
     localStorage.setItem("Last Name", lastName);
     localStorage.setItem("Email", mail);
     localStorage.setItem("Password", pass);
-    window.location.replace("./index.html")
-};
 
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user)
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+};
 window.sign = sign

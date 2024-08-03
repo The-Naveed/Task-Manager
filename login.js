@@ -1,3 +1,8 @@
+import { getAuth, signInWithEmailAndPassword } from "./firebase.js"
+if(localStorage.getItem("user")){
+  window.location.replace("./main.html")
+}
+
 const login = _ => {
     let mail = document.getElementById("mail")
     let pass = document.getElementById("pass")
@@ -15,6 +20,20 @@ const login = _ => {
     }
     localStorage.setItem("Email", mail.value);
     localStorage.setItem("Password", pass.value);
+
+const auth = getAuth();
+var email = mail.value
+var password = pass.value
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
     window.location.replace("./main.html")
 };
