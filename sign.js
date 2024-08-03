@@ -1,5 +1,4 @@
 import {
-    auth,
     createUserWithEmailAndPassword,
     getAuth
 }
@@ -43,11 +42,14 @@ import {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user)
+            console.log(user);
+            alert("You're successfully registerd")
+            window.location.replace("./index.html")
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            alert(errorCode,errorMessage)
         });
 };
 window.sign = sign

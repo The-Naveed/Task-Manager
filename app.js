@@ -1,6 +1,4 @@
 import {
-    app,
-    getFirestore,
     db,
     collection,
     addDoc,
@@ -17,7 +15,6 @@ let month = String(now.getMonth() + 1).padStart(2, '0');
 let day = String(now.getDate()).padStart(2, '0');
 let hours = String(now.getHours()).padStart(2, '0');
 let minutes = String(now.getMinutes()).padStart(2, '0');
-let seconds = String(now.getSeconds()).padStart(2, '0');
 let formattedDate = `${day}-${month}-${year}`;
 let formattedTime = `${hours}:${minutes}`;
 
@@ -25,9 +22,13 @@ let formattedTime = `${hours}:${minutes}`;
 let getInput = document.getElementById("data");
 let mainCard = document.getElementById("card");
 const taskAdd = async (task) => {
+    if (getInput.value.length <= 3) {
+        alert("Task should be consist of 4 words")
+        return
+    };
     try {
         let docRef = await addDoc(collection(db, "Card"), {
-            // Initially add data without the ID
+
             info: `<div class="col-12 col-md-6 col-lg-4 card load" style="background: #052b4e;">
             <div class="d-flex justify-content-around mb-3 p-2">
             <p class="card-text">Day:</p>
@@ -76,7 +77,7 @@ const taskAdd = async (task) => {
 
 try {
     // mainCard.innerHTML = "Managing Your Data Please Wait..."
-    mainCard.innerHTML = `<img height="100px" width="100px" src="https://i.gifer.com/ZKZg.gif" alt="Managing Your Data Please Wait..."><br><h5>Managing Your Data Please Wait...</h5>`
+    mainCard.innerHTML = `<img height="50px" width="50px" src="https://i.gifer.com/ZKZg.gif"><br><h5>Managing Your Data Please Wait...</h5>`
     const querySnapshot = await getDocs(collection(db, "Card"));
     mainCard.innerHTML = ""
     querySnapshot.forEach((doc) => {

@@ -40,7 +40,7 @@ input {
     color: #d0c4af;
     font-weight: bold;
 }
-
+  
 input:focus {
     border: none;
     outline: none;
@@ -68,8 +68,12 @@ input:focus {
     font-weight: bold;
 }
 
+.task{
+    font-size: 50px;
+}
+
 .form {
-    margin: 5%;
+     margin: 5%;
     border-radius: 20px;
     padding: 20px;
     background: #052b4e;

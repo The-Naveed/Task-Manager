@@ -1,45 +1,38 @@
 import { getAuth, signInWithEmailAndPassword } from "./firebase.js"
-if(localStorage.getItem("user")){
-  window.location.replace("./main.html")
-}
 
 const login = _ => {
-    let mail = document.getElementById("mail")
-    let pass = document.getElementById("pass")
-    if (!mail.value) {
-        alert("Email Not Found")
-        return
-    }
-    if (!pass.value) {
-        alert("Password Not Found")
-        return
-    }
-    if (pass.value.length <= 7) {
-        alert("Password Must Be 8 Characters")
-        return
-    }
-    localStorage.setItem("Email", mail.value);
-    localStorage.setItem("Password", pass.value);
+  let mail = document.getElementById("mail")
+  let pass = document.getElementById("pass")
+  if (!mail.value) {
+    alert("Email Not Found")
+    return
+  }
+  if (!pass.value) {
+    alert("Password Not Found")
+    return
+  }
+  if (pass.value.length <= 7) {
+    alert("Password Must Be 8 Characters")
+    return
+  }
 
-const auth = getAuth();
-var email = mail.value
-var password = pass.value
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user)
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, mail.value, pass.value)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user)
+      window.location.replace("./main.html")
+    })
+    .catch((error) => {
+      const errorCode = "May you arn't registerd or incorrect email / password ";
+      const errorMessage = "May you arn't registerd or incorrect email or password ";
+      alert(errorCode,errorMessage)
+    });
 
-    window.location.replace("./main.html")
 };
 
 const create = _ => {
-    window.location.replace("./sign.html")
+  window.location.replace("./sign.html")
 }
 
 window.login = login
